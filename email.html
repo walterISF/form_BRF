@@ -1,40 +1,3 @@
-<?php 
-
-	$questao1 = $_GET['questao1'];
-	$questao2 = $_GET['questao2'];
-	$questao3 = $_GET['questao3'];
-	$questao4 = $_GET['questao4'];
-	$questao51 = $_GET['questao51'];
-    $questao52 = $_GET['questao52'];
-    $questao53 = $_GET['questao53'];
-    $questao54 = $_GET['questao54'];
-    $questao55 = $_GET['questao55'];
-    $questao56 = $_GET['questao56'];
-    $questao57 = $_GET['questao57'];
-    $questao61 = $_GET['questao61'];
-    $questao62 = $_GET['questao62'];
-    $questao63 = $_GET['questao63'];
-    $questao64 = $_GET['questao64'];
-    $questao65 = $_GET['questao65'];
-    $questao66 = $_GET['questao66'];
-    $questao67 = $_GET['questao67'];
-    $questao71 = $_GET['questao71'];
-    $questao72 = $_GET['questao72'];
-    $questao73 = $_GET['questao73'];
-    $questao74 = $_GET['questao74'];
-    $questao75 = $_GET['questao75'];
-    $questao76 = $_GET['questao76'];
-    $questao77 = $_GET['questao77'];
-	$questao8 = $_GET['questao8'];
-	$questao9 = $_GET['questao9'];
-	$questao10 = $_GET['questao10'];
-    $questao11 = $_GET['questao11'];
-
-	$assunto = 'Questionário BRF';
-
-	//$email_destino = 'Web e Ponto <contato@webeponto.com.br>';
-
-	$conteudo  = '
 		<!doctype html>
 <html>
 <head>
@@ -47,7 +10,7 @@
 
             <table width="600px" border="0" cellspacing="0">
                 <tr>
-                    <td style="background-color: #EBEBEB;padding: 7px;font-family: arial;">1 - Quando foi a última vez que você entrou em contato com nosso suporte (vNOC e/ou Concierge)?</td>
+                    <td style="background-color: #EBEBEB;padding: 7px;font-family: arial;">1 - Quando foi a última vez que você entrou em contato com nosso suporte?</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold;padding-bottom: 30px;">'.$questao1.'</td>
@@ -56,7 +19,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td style="background-color: #EBEBEB;padding: 7px;font-family: arial;">2 - Como você entrou em contato com nossos consultores técnicos?</td>
+                    <td style="background-color: #EBEBEB;padding: 7px;font-family: arial;">2 - Como você entrou em contato com nosso agente?</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold;padding-bottom: 30px;">'.$questao2.'</td>
@@ -199,56 +162,3 @@
                 
   </body>
 </html>
-		';
-
-   date_default_timezone_set('America/Sao_Paulo');
-
-    //destinatario
-    $email_destino = 'isabela.cavalcanti@netglobe.com.br';
-     //remetente
-
-
-     $emailsender = 'atendimento@vnoc.com.br';
-     include("../phpmailer/class.phpmailer.php");
-        //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
-
-        $mail             = new PHPMailer();
-
-        $mail->CharSet = "UTF-8"; 
-        $mail->IsSMTP();
-        $mail->SMTPAuth   = true;                  // enable SMTP authentication
-        $mail->SMTPSecure = "tls";                 // sets the prefix to the servier
-        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
-
-        $mail->Username   = "noreply@vnoc.com.br";  // GMAIL username
-        $mail->Password   = "vnoc@vnoc2";            // GMAIL password
-
-        $mail->AddReplyTo("noreply@vnoc.com.br","NO REPLY");
-
-        $mail->From       = "noreply@vnoc.com.br";
-        $mail->FromName   = "NetGlobe Video Cloud";
-      //$mail->AddCC($cc, $cc);
-      //$mail->AddBCC($cco, $cco);
-
-        $mail->Subject    = $assunto;
-
-        //$mail->Body       = "Hi,<br>This is the HTML BODY<br>";                      //HTML Body
-        //$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
-        $mail->WordWrap   = 50; // set word wrap
-
-        $mail->MsgHTML($conteudo);
-
-        $mail->AddAddress($email_destino);
-
-        $mail->IsHTML(true); // send as HTML
-
-
-        if(!$mail->Send()) {
-          $str_msg = 'Infelizmente ocorreu um erro em nossos servidores, por favor tente mais tarde. ->' . $mail->ErrorInfo;
-        } else {
-          $str_msg = 'Sua mensagem foi enviada com sucesso!';
-          echo json_encode('email enviado');
-        }
-
-?>
